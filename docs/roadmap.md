@@ -7,12 +7,13 @@ Phases are strictly ordered; a phase starts only when the previous phase's defin
 Scaffolding and gates, no analysis logic.
 
 - Initialize git repo + UV workspace (root `pyproject.toml`, `.python-version`, member skeletons with `src/` layout and empty test suites) — spec 0013.
+- Activate the development workflow (spec 0014): GitHub remote with `develop` as default branch, branch protection (owner approval + green CI, no direct pushes), CODEOWNERS, PR template, `ci.yml`, commitizen hook; validate with a canary PR. (`gh` CLI already installed and authenticated as `bhenriq-souza`.)
 - Configure quality pipeline: ruff, pyright, bandit, import-linter, pytest+cov, pre-commit; `scripts/check_specs.py` and `scripts/check_language.py`.
 - `agents_core` skeleton: `AgentsSettings`, structlog setup, error types, `SecurityPolicy` (spec 0010, 0012).
 - `agents_ollama_client` skeleton: typed httpx client with health check, chat call, `format=json` support (spec 0007's call contract).
 - `scripts/build_fixture_repo.py` + shared conftest fixtures + fake Ollama transport (spec 0011).
 
-**DoD:** `uv sync` from clean clone works; `uv run pytest`, `ruff`, `pyright`, `bandit`, `lint-imports` all green (AC-0013-01); SecurityPolicy tests pass (AC-0010-01, 02, 05); fixture repo deterministic (AC-0011-02).
+**DoD:** `uv sync` from clean clone works; `uv run pytest`, `ruff`, `pyright`, `bandit`, `lint-imports` all green (AC-0013-01); SecurityPolicy tests pass (AC-0010-01, 02, 05); fixture repo deterministic (AC-0011-02); branch protection active and canary PR exercised end-to-end (AC-0014-01..03). From this point on, every task ships as an owner-approved PR.
 
 ## Phase 1 — MVP pipeline
 

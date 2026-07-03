@@ -48,6 +48,7 @@ Development is performed mostly by AI dev agents, so every unit of work must be 
 2. **ADRs record decisions.** `specs/adr/` explains *why* the architecture is the way it is.
 3. **Tasks trace to specs.** `docs/backlog.md` lists tasks with IDs like `T-0007-03` (task 03 of spec 0007). A task is *done* only when its spec's acceptance criteria and mapped tests pass.
 4. **Conventions** for writing and evolving specs are in [`specs/0000-spec-process.md`](specs/0000-spec-process.md).
+5. **Git workflow** ([`specs/0014-development-workflow.md`](specs/0014-development-workflow.md)): branch per task from a freshly pulled `develop`, Conventional Commits, standardized PR squash-merged only after owner approval. AI dev agents must read [`AGENTS.md`](AGENTS.md) before working here.
 
 Start reading at [`specs/0001-ai-repo-auditor-overview.md`](specs/0001-ai-repo-auditor-overview.md), then [`docs/roadmap.md`](docs/roadmap.md).
 
@@ -69,6 +70,7 @@ Start reading at [`specs/0001-ai-repo-auditor-overview.md`](specs/0001-ai-repo-a
 | 0011 | [Testing strategy](specs/0011-testing-strategy.md) |
 | 0012 | [Configuration & dependency injection](specs/0012-configuration-and-di.md) |
 | 0013 | [Monorepo & tooling](specs/0013-monorepo-and-tooling.md) |
+| 0014 | [Development workflow](specs/0014-development-workflow.md) |
 
 ADRs: [`specs/adr/`](specs/adr/)
 

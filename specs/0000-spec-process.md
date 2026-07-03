@@ -61,6 +61,7 @@ A task must not require interpretation beyond its spec. If it does, the spec is 
 3. Quality gates pass: `uv run ruff check`, `uv run ruff format --check`, `uv run pyright`, `uv run bandit` (per spec 0013).
 4. No forbidden language in user-facing strings (see below).
 5. Spec `status` updated to `implemented` when all its tasks are done.
+6. Work delivered via a pull request from a task branch, following spec 0014 (branch ritual, Conventional Commits, PR template), **approved by the repository owner** and squash-merged into `develop`; the task's backlog checkbox is ticked in the same PR.
 
 ## Language policy (normative for all user-facing output)
 

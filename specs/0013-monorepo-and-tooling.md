@@ -14,7 +14,7 @@ Define the UV workspace layout, package boundaries, dependency policy and the lo
 ## Scope / Non-goals
 
 - **In scope:** workspace structure, member pyprojects, tool configuration, quality commands, pre-commit.
-- **Non-goals:** publishing to registries (internal workspace deps only this phase), remote CI (local-first; a CI workflow is a cheap later addition since gates are plain `uv run` commands).
+- **Non-goals:** publishing to registries (internal workspace deps only this phase). CI on PRs *is* in scope — it mirrors the local gates (spec 0014).
 
 ## Contracts
 
@@ -36,6 +36,9 @@ langgraph-agents/
   scripts/                  # build_fixture_repo.py, check_specs.py, check_language.py
   reports/                  # runtime output, gitignored
   specs/  docs/
+  AGENTS.md  CLAUDE.md      # operating manual for AI dev agents (CLAUDE.md imports AGENTS.md)
+  .claude/skills/           # repo skills: implement-task, new-spec, check, finish-task
+  .github/                  # PULL_REQUEST_TEMPLATE.md, CODEOWNERS, workflows/ci.yml (spec 0014)
 ```
 
 Every member uses `src/` layout (`src/<import_name>/`) plus its own `tests/`. Root `pyproject.toml` declares `[tool.uv.workspace] members = ["packages/*", "agents/*", "mcp_servers/*"]`; members depend on each other via `[tool.uv.sources] agents-core = { workspace = true }`. Internal versions stay `0.x` and move together (no independent release trains this phase).
@@ -51,7 +54,7 @@ Every member uses `src/` layout (`src/<import_name>/`) plus its own `tests/`. Ro
 | `ai-repo-auditor` | `agents-core`, `agents-ollama-client`, `langgraph`, `pathspec`, `dependency-injector` |
 | `ai-repo-auditor-mcp` | `ai-repo-auditor`, `mcp` (official SDK) |
 
-Rules: `packages/*` never depend on `agents/*` or `mcp_servers/*`; agents never depend on MCP servers; git access via subprocess wrapper (no `gitpython` — ADR 0006). Dev deps (root group): `pytest`, `pytest-cov`, `pytest-xdist`, `hypothesis`, `ruff`, `pyright`, `bandit`, `import-linter`, `pre-commit`.
+Rules: `packages/*` never depend on `agents/*` or `mcp_servers/*`; agents never depend on MCP servers; git access via subprocess wrapper (no `gitpython` — ADR 0006). Dev deps (root group): `pytest`, `pytest-cov`, `pytest-xdist`, `hypothesis`, `ruff`, `pyright`, `bandit`, `import-linter`, `pre-commit`, `commitizen`.
 
 ### Entry point
 
@@ -73,7 +76,11 @@ Aggregate: `uv run poe check` (or a `scripts/check.sh` wrapper — decided at im
 
 ### pre-commit
 
-Hooks: ruff format, ruff check `--fix`, pyright (changed files), bandit (changed files), end-of-file/trailing-whitespace. Full pytest is not a pre-commit hook (too slow); it gates task completion instead.
+Hooks: ruff format, ruff check `--fix`, pyright (changed files), bandit (changed files), end-of-file/trailing-whitespace, and **commitizen** on the `commit-msg` stage enforcing Conventional Commits (spec 0014). Full pytest is not a pre-commit hook (too slow); it gates task completion instead.
+
+### CI (`.github/workflows/ci.yml`)
+
+Runs on every PR to `develop` and mirrors the local pipeline exactly (INV-0014-05): setup uv → `uv sync` → the gate commands from the table above. Required status check for merging (spec 0014 branch protection).
 
 ## Invariants
 
