@@ -1,0 +1,19 @@
+[project]
+name = "ai-repo-auditor"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "agents-core",
+    "agents-ollama-client",
+    "langgraph>=0.2",
+    "pathspec>=0.12",
+    "dependency-injector>=4.41",
+]
+
+[tool.uv.sources]
+agents-core = { workspace = true }
+agents-ollama-client = { workspace = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

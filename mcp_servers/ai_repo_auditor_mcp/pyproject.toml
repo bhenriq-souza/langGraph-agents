@@ -1,0 +1,18 @@
+[project]
+name = "ai-repo-auditor-mcp"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "ai-repo-auditor",
+    "mcp>=1.0",
+]
+
+[tool.uv.sources]
+ai-repo-auditor = { workspace = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.scripts]
+ai-repo-auditor-mcp = "ai_repo_auditor_mcp.server:main"
