@@ -1,0 +1,11 @@
+[tool.uv.workspace]
+members = ["packages/*", "agents/*", "mcp_servers/*"]
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["packages", "agents", "mcp_servers"]
+addopts = "--import-mode=importlib"
