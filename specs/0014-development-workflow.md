@@ -77,6 +77,8 @@ Task: T-0004-01
 
 **Bootstrap exception:** commits made before the remote exists and protection is enabled (this planning phase and the first scaffold) land on `develop` directly. From the moment protection is active, everything goes through PRs — including changes to specs and to this workflow.
 
+**Phased activation of rule 2:** the required `ci` status check is enabled only at the end of phase 0 (T-0014-02), once the quality-pipeline tooling and scripts exist. Enabling it earlier would deadlock the first PRs: with `enforce_admins` active, the PR that introduces the tooling could never pass the check it is required to satisfy. Until then, rule 1 (owner approval) is the gate; agents must still run the local pipeline before opening PRs.
+
 ### CI on PRs — `.github/workflows/ci.yml`
 
 Runs on every PR to `develop`: checkout → install uv → `uv sync` → the exact spec-0013 gate commands (format, lint, types, security, imports, tests+coverage, spec checks). CI must mirror the local pipeline — no CI-only or local-only gates.
