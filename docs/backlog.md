@@ -14,6 +14,14 @@ Task format per spec 0000: `T-<spec>-<nn>` · **What** · **Where** · **Done wh
 - [ ] **T-0007-01** — Implement `agents_ollama_client`: httpx-based client with `health()`, `list_models()`, `chat_json()` (format=json, options, timeout), typed responses, transport seam for fakes. · Where: `packages/ollama_client/src/agents_ollama_client/`. · Done when: unit tests over a mocked transport cover success, timeout, connection error; INV-0007-04 honored via settings URL.
 - [ ] **T-0011-01** — Implement `scripts/build_fixture_repo.py` (scripted history per spec 0011: AI-ish file, human-ish file, minified, generated, lockfile, node_modules, binary, escaping symlink, canary string; fixed dates) + shared `conftest.py` fixture + fake Ollama transport with programmable behaviors and call counter. · Where: `scripts/`, `tests/conftest.py`. · Done when: AC-0011-02 (deterministic hashes); fake behaviors unit-tested.
 
+## Phase 0.5 — Hello World MCP server (remote-hosting PoC)
+
+Tasks for spec 0015. Can run in parallel with pending Phase 0 tasks; requires only T-0013-01 (done).
+
+- [ ] **T-0015-01** — Implement `hello_world_mcp` workspace member: `pyproject.toml` (hatchling, `mcp>=1.0`, `structlog>=24`), `src/hello_world_mcp/{settings.py, server.py, py.typed}`, and test suite (`test_hello_tool.py`, `test_settings.py`, `test_http_transport.py`). `uv sync` lockfile update included. · Where: `mcp_servers/hello_world_mcp/`. · Done when: AC-0015-01..06; INV-0015-01..04.
+- [ ] **T-0015-02** — Write the HTTPS tunnel + Gemini Enterprise runbook (`mcp_servers/hello_world_mcp/README.md`): HTTP-mode startup command, ngrok/cloudflared Host-header workaround, MCP Inspector smoke test, and Gemini Enterprise registration steps with verified auth findings. · Where: `mcp_servers/hello_world_mcp/README.md`. · Done when: runbook executed end-to-end against the Gemini Enterprise account; registration steps and auth requirements documented (AC-0015-03 verified via tunnel).
+- [ ] **T-0015-03** — Cloud Run PoC: `Dockerfile` (uv multi-stage, `AGENTS_MCP_HOST=0.0.0.0`, honours `$PORT`), manual `gcloud run deploy` notes appended to README, stateless-mode verified with >1 instance, auth decision recorded. · Where: `mcp_servers/hello_world_mcp/Dockerfile` + README appendix. · Done when: Cloud Run URL responds to initialize/tools/list/tools/call via MCP Inspector; INV-0015-03 verified.
+
 ## Phase 1 — MVP pipeline
 
 - [ ] **T-0002-01** — Define `AnalysisRequest`, `AnalysisResponse`, `TopFile`, `AnalysisMetadata` (exact fields/constraints of spec 0002). · Where: `packages/core/src/agents_core/contracts.py`. · Done when: validation tests incl. `extra="forbid"` and bounds (AC-0002-04 groundwork).
