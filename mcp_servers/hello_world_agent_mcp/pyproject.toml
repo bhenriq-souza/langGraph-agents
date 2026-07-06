@@ -1,0 +1,19 @@
+[project]
+name = "hello-world-agent-mcp"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "hello-world-agent",
+    "mcp>=1.0",
+    "structlog>=24",
+]
+
+[tool.uv.sources]
+hello-world-agent = { workspace = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.scripts]
+hello-world-agent-mcp = "hello_world_agent_mcp.server:main"

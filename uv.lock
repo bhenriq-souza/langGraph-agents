@@ -15,6 +15,7 @@ members = [
     "ai-repo-auditor",
     "ai-repo-auditor-mcp",
     "hello-world-agent",
+    "hello-world-agent-mcp",
     "hello-world-mcp",
 ]
 
@@ -376,6 +377,23 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [{ name = "langgraph", specifier = ">=0.2" }]
+
+[[package]]
+name = "hello-world-agent-mcp"
+version = "0.1.0"
+source = { editable = "mcp_servers/hello_world_agent_mcp" }
+dependencies = [
+    { name = "hello-world-agent" },
+    { name = "mcp" },
+    { name = "structlog" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "hello-world-agent", editable = "agents/hello_world_agent" },
+    { name = "mcp", specifier = ">=1.0" },
+    { name = "structlog", specifier = ">=24" },
+]
 
 [[package]]
 name = "hello-world-mcp"
