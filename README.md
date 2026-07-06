@@ -71,6 +71,7 @@ Start reading at [`specs/0001-ai-repo-auditor-overview.md`](specs/0001-ai-repo-a
 | 0012 | [Configuration & dependency injection](specs/0012-configuration-and-di.md) |
 | 0013 | [Monorepo & tooling](specs/0013-monorepo-and-tooling.md) |
 | 0014 | [Development workflow](specs/0014-development-workflow.md) |
+| 0015 | [Hello World MCP server](specs/0015-hello-world-mcp.md) |
 
 ADRs: [`specs/adr/`](specs/adr/)
 
