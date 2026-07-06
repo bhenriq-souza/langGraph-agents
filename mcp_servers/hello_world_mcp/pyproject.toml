@@ -1,0 +1,15 @@
+[project]
+name = "hello-world-mcp"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "mcp>=1.0",
+    "structlog>=24",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.scripts]
+hello-world-mcp = "hello_world_mcp.server:main"
