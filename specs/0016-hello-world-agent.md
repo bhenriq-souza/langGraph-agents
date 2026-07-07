@@ -1,7 +1,7 @@
 ---
 id: "0016"
 title: Hello World Agent
-status: draft
+status: implemented
 depends_on: ["0013", "0014"]
 ---
 

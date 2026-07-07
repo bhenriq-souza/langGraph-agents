@@ -2,7 +2,7 @@
 
 A Python monorepo (managed with [UV workspaces](https://docs.astral.sh/uv/concepts/projects/workspaces/)) for building local AI agents orchestrated with **LangGraph** and exposed to AI workspaces (Odysseus, Open WebUI, Claude Code, …) exclusively through **MCP servers**. All inference runs locally via **Ollama**.
 
-> **Status:** planning phase. This repository currently contains only specs, ADRs and the roadmap. No code has been written yet — implementation is driven by the specs (see [Spec Driven Development](#spec-driven-development) below).
+> **Status:** planning phase for the production agent. The `ai-repo-auditor` pipeline (Phase 1) is still pending — implementation is driven by the specs (see [Spec Driven Development](#spec-driven-development) below). Two Hello World PoCs are implemented and verified end-to-end (remote MCP hosting, real LangGraph execution over MCP): [`hello_world_mcp`](mcp_servers/hello_world_mcp/README.md) (spec 0015) and [`hello_world_agent`](agents/hello_world_agent/) + [`hello_world_agent_mcp`](mcp_servers/hello_world_agent_mcp/README.md) (spec 0016).
 
 ## First agent: `ai-repo-auditor`
 
